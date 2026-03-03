@@ -1,0 +1,194 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning Noise-Invariant Representations for Unified Speech Enhancement and Text-to-Speech</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+      color: #222;
+    }
+
+    header {
+      background: #1a1a1a;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 0.5px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 26px;
+      margin: 1.5rem 0 0.5rem;
+      border-bottom: 3px solid #ddd;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+
+    .abstract {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .audio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.3rem;
+      margin-top: 1.5rem;
+    }
+
+    .audio-card {
+      background: #fff;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .audio-card p {
+      font-size: 14px;
+      color: #666;
+      margin: 0.6rem 0;
+    }
+
+    audio {
+      width: 100%;
+      outline: none;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header>
+    <h1>Learning Noise-Invariant Representations for Unified Speech Enhancement and Text-to-Speech</h1>
+  </header>
+
+  <div class="container">
+
+    <!-- Abstract Section -->
+    <div class="container">
+
+      <h2 style="text-align: center;">Abstract</h2>
+
+      <div class="abstract-text">
+        <p>
+        Zero-shot text-to-speech (TTS) systems exhibit limited noise-robustness. 
+        Existing approaches address this through extra processing or complex decoupling, leading to higher computation cost and artifacts. 
+        In this paper, we propose a unified joint speech enhancement (SE) and TTS model based on conditional flow matching. 
+        Our method enables single-step SE while jointly learning noise-invariant linguistic and speaker representations for TTS. 
+        To further enforce semantic consistency, we introduce a Paired Align-Uniform Loss, which pulls together sub-positive pairs generated from the same noisy prompt while maintaining separation across different prompts. 
+        In addition, Environment Fréchet Coefficient is proposed as an objective metric to evaluate background retention quality, complementing existing subjective metrics. 
+        Experimental results show that the proposed model can generate high-quality audio under diverse noisy conditions in a controllable manner.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Sample 1 -->
+    <h2 class="section-title">Sample 1</h2>
+
+    <div class="sample-block">
+
+      <!-- ================= TEXT ================= -->
+      <div class="text-block">
+        <p><strong>Prompt Text:</strong> ...</p>
+        <p><strong>Synthesis Text:</strong> ...</p>
+      </div>
+
+      <!-- ================= TABLE ================= -->
+      <table class="audio-table">
+        <thead>
+          <tr>
+            <th>Noise Conditions</th>
+            <th>Clean</th>
+            <th>Noise</th>
+            <th>Interf.</th>
+            <th>Reverb</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- Prompt Audio -->
+          <tr>
+            <td>Prompt Audio</td>
+            <td><audio controls><source src="audios/clean/prompt.wav"></audio></td>
+            <td><audio controls><source src="audios/noise/prompt.wav"></audio></td>
+            <td><audio controls><source src="audios/interf/prompt.wav"></audio></td>
+            <td><audio controls><source src="audios/reverb/prompt.wav"></audio></td>
+          </tr>
+
+          <!-- Ground Truth -->
+          <tr>
+            <td>Ground Truth</td>
+            <td><audio controls><source src="audios/clean/gt.wav"></audio></td>
+            <td><audio controls><source src="audios/noise/gt.wav"></audio></td>
+            <td><audio controls><source src="audios/interf/gt.wav"></audio></td>
+            <td><audio controls><source src="audios/reverb/gt.wav"></audio></td>
+          </tr>
+
+          <!-- Noise-Robust -->
+          <tr>
+            <td>Noise-Robust</td>
+            <td><audio controls><source src="audios/clean/nr.wav"></audio></td>
+            <td><audio controls><source src="audios/noise/nr.wav"></audio></td>
+            <td><audio controls><source src="audios/interf/nr.wav"></audio></td>
+            <td><audio controls><source src="audios/reverb/nr.wav"></audio></td>
+          </tr>
+
+          <!-- Environment-Aware -->
+          <tr>
+            <td>Environment-Aware</td>
+            <td><audio controls><source src="audios/clean/ea.wav"></audio></td>
+            <td><audio controls><source src="audios/noise/ea.wav"></audio></td>
+            <td><audio controls><source src="audios/interf/ea.wav"></audio></td>
+            <td><audio controls><source src="audios/reverb/ea.wav"></audio></td>
+          </tr>
+
+          <!-- F5-TTS -->
+          <tr>
+            <td>F5-TTS</td>
+            <td><audio controls><source src="audios/clean/f5.wav"></audio></td>
+            <td><audio controls><source src="audios/noise/f5.wav"></audio></td>
+            <td><audio controls><source src="audios/interf/f5.wav"></audio></td>
+            <td><audio controls><source src="audios/reverb/f5.wav"></audio></td>
+          </tr>
+
+          <!-- Cascaded -->
+          <tr>
+            <td>Cascaded SE+TTS</td>
+            <td><audio controls><source src="audios/clean/cascade.wav"></audio></td>
+            <td><audio controls><source src="audios/noise/cascade.wav"></audio></td>
+            <td><audio controls><source src="audios/interf/cascade.wav"></audio></td>
+            <td><audio controls><source src="audios/reverb/cascade.wav"></audio></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
