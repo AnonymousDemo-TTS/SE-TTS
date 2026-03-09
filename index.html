@@ -74,13 +74,45 @@
       width: 100%;
       outline: none;
     }
+
+    .text-block {
+      background: #ffffff;
+      padding: 18px 22px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .text-line {
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      font-weight: 600;
+      color: #444;
+    }
+
+    .audio-line {
+      margin-top: 12px;
+    }
+
+    .audio-line audio {
+      width: 260px;
+      margin-left: 10px;
+    }
+
+    .audio-table audio{
+      width: 150px;
+    }
   </style>
 
 </head>
 <body>
 
   <header>
-    <h1>Learning Noise-Invariant Representations for Unified Speech Enhancement and Text-to-Speech</h1>
+    <h1>Unified Noise-Invariant Speech Enhancement and Text-to-Speech via Flow Matching</h1>
   </header>
 
   <div class="container">
@@ -96,7 +128,7 @@
         Existing approaches address this through extra processing or complex decoupling, leading to higher computation cost and artifacts. 
         In this paper, we propose a unified joint speech enhancement (SE) and TTS model based on conditional flow matching. 
         Our method enables single-step SE while jointly learning noise-invariant linguistic and speaker representations for TTS. 
-        To further enforce semantic consistency, we introduce a Paired Align-Uniform Loss, which pulls together sub-positive pairs generated from the same noisy prompt while maintaining separation across different prompts. 
+        To further enforce semantic consistency, we introduce a Paired Align-Uniform loss, which pulls together sub-positive pairs generated from the same noisy prompt while maintaining separation across different prompts. 
         In addition, Environment Fréchet Coefficient is proposed as an objective metric to evaluate background retention quality, complementing existing subjective metrics. 
         Experimental results show that the proposed model can generate high-quality audio under diverse noisy conditions in a controllable manner.
         </p>
@@ -111,8 +143,24 @@
 
       <!-- ================= TEXT ================= -->
       <div class="text-block">
-        <p><strong>Prompt Text:</strong> ...</p>
-        <p><strong>Synthesis Text:</strong> ...</p>
+
+        <div class="text-line">
+          <span class="label">Prompt Text:</span>
+          The livery becomes obnoxious to nearly all who are required to wear it.
+        </div>
+
+        <div class="text-line">
+          <span class="label">Synthesis Text:</span>
+          The utility of consumption as an evidence of wealth is to be classed as a derivative growth.
+        </div>
+
+        <div class="audio-line">
+          <span class="label">Ground Truth:</span>
+          <audio controls>
+            <source src="audios/1/gt.wav">
+          </audio>
+        </div>
+
       </div>
 
       <!-- ================= TABLE ================= -->
@@ -132,55 +180,455 @@
           <!-- Prompt Audio -->
           <tr>
             <td>Prompt Audio</td>
-            <td><audio controls><source src="audios/clean/prompt.wav"></audio></td>
-            <td><audio controls><source src="audios/noise/prompt.wav"></audio></td>
-            <td><audio controls><source src="audios/interf/prompt.wav"></audio></td>
-            <td><audio controls><source src="audios/reverb/prompt.wav"></audio></td>
+            <td><audio controls><source src="audios/1/prompts/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/1/prompts/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/1/prompts/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/1/prompts/reverb.wav"></audio></td>
           </tr>
 
-          <!-- Ground Truth -->
+          <!-- Speech Enhancement -->
           <tr>
-            <td>Ground Truth</td>
-            <td><audio controls><source src="audios/clean/gt.wav"></audio></td>
-            <td><audio controls><source src="audios/noise/gt.wav"></audio></td>
-            <td><audio controls><source src="audios/interf/gt.wav"></audio></td>
-            <td><audio controls><source src="audios/reverb/gt.wav"></audio></td>
+            <td>Speech Enhancement</td>
+            <td><audio controls><source src="audios/1/se/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/1/se/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/1/se/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/1/se/reverb.wav"></audio></td>
           </tr>
 
           <!-- Noise-Robust -->
           <tr>
             <td>Noise-Robust</td>
-            <td><audio controls><source src="audios/clean/nr.wav"></audio></td>
-            <td><audio controls><source src="audios/noise/nr.wav"></audio></td>
-            <td><audio controls><source src="audios/interf/nr.wav"></audio></td>
-            <td><audio controls><source src="audios/reverb/nr.wav"></audio></td>
+            <td><audio controls><source src="audios/1/nr/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/1/nr/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/1/nr/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/1/nr/reverb.wav"></audio></td>
           </tr>
 
           <!-- Environment-Aware -->
           <tr>
             <td>Environment-Aware</td>
-            <td><audio controls><source src="audios/clean/ea.wav"></audio></td>
-            <td><audio controls><source src="audios/noise/ea.wav"></audio></td>
-            <td><audio controls><source src="audios/interf/ea.wav"></audio></td>
-            <td><audio controls><source src="audios/reverb/ea.wav"></audio></td>
+            <td><audio controls><source src="audios/1/ea/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/1/ea/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/1/ea/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/1/ea/reverb.wav"></audio></td>
           </tr>
 
           <!-- F5-TTS -->
           <tr>
             <td>F5-TTS</td>
-            <td><audio controls><source src="audios/clean/f5.wav"></audio></td>
-            <td><audio controls><source src="audios/noise/f5.wav"></audio></td>
-            <td><audio controls><source src="audios/interf/f5.wav"></audio></td>
-            <td><audio controls><source src="audios/reverb/f5.wav"></audio></td>
+            <td><audio controls><source src="audios/1/f5/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/1/f5/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/1/f5/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/1/f5/reverb.wav"></audio></td>
           </tr>
 
           <!-- Cascaded -->
           <tr>
             <td>Cascaded SE+TTS</td>
-            <td><audio controls><source src="audios/clean/cascade.wav"></audio></td>
-            <td><audio controls><source src="audios/noise/cascade.wav"></audio></td>
-            <td><audio controls><source src="audios/interf/cascade.wav"></audio></td>
-            <td><audio controls><source src="audios/reverb/cascade.wav"></audio></td>
+            <td><audio controls><source src="audios/1/cascade/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/1/cascade/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/1/cascade/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/1/cascade/reverb.wav"></audio></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Sample 2 -->
+    <h2 class="section-title">Sample 2</h2>
+
+    <div class="sample-block">
+
+      <!-- ================= TEXT ================= -->
+      <div class="text-block">
+
+        <div class="text-line">
+          <span class="label">Prompt Text:</span>
+          But then the picture was gone as quickly as it came.
+        </div>
+
+        <div class="text-line">
+          <span class="label">Synthesis Text:</span>
+          Warrenton spoke thus with significance, to show Robin that he was not to think Geoffrey's claims to the estate would be passed by.
+        </div>
+
+        <div class="audio-line">
+          <span class="label">Ground Truth:</span>
+          <audio controls>
+            <source src="audios/2/gt.wav">
+          </audio>
+        </div>
+
+      </div>
+
+      <!-- ================= TABLE ================= -->
+      <table class="audio-table">
+        <thead>
+          <tr>
+            <th>Noise Conditions</th>
+            <th>Clean</th>
+            <th>Noise</th>
+            <th>Interf.</th>
+            <th>Reverb</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- Prompt Audio -->
+          <tr>
+            <td>Prompt Audio</td>
+            <td><audio controls><source src="audios/2/prompts/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/2/prompts/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/2/prompts/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/2/prompts/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Speech Enhancement -->
+          <tr>
+            <td>Speech Enhancement</td>
+            <td><audio controls><source src="audios/2/se/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/2/se/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/2/se/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/2/se/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Noise-Robust -->
+          <tr>
+            <td>Noise-Robust</td>
+            <td><audio controls><source src="audios/2/nr/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/2/nr/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/2/nr/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/2/nr/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Environment-Aware -->
+          <tr>
+            <td>Environment-Aware</td>
+            <td><audio controls><source src="audios/2/ea/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/2/ea/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/2/ea/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/2/ea/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- F5-TTS -->
+          <tr>
+            <td>F5-TTS</td>
+            <td><audio controls><source src="audios/2/f5/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/2/f5/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/2/f5/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/2/f5/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Cascaded -->
+          <tr>
+            <td>Cascaded SE+TTS</td>
+            <td><audio controls><source src="audios/2/cascade/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/2/cascade/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/2/cascade/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/2/cascade/reverb.wav"></audio></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Sample 3 -->
+    <h2 class="section-title">Sample 3</h2>
+
+    <div class="sample-block">
+
+      <!-- ================= TEXT ================= -->
+      <div class="text-block">
+
+        <div class="text-line">
+          <span class="label">Prompt Text:</span>
+          Nothing more, not even the wrist to which it might be attached.
+        </div>
+
+        <div class="text-line">
+          <span class="label">Synthesis Text:</span>
+          I had scarcely known what I had been saying or doing up to this time, but as he spoke I looked at my hand.
+        </div>
+
+        <div class="audio-line">
+          <span class="label">Ground Truth:</span>
+          <audio controls>
+            <source src="audios/3/gt.wav">
+          </audio>
+        </div>
+
+      </div>
+
+      <!-- ================= TABLE ================= -->
+      <table class="audio-table">
+        <thead>
+          <tr>
+            <th>Noise Conditions</th>
+            <th>Clean</th>
+            <th>Noise</th>
+            <th>Interf.</th>
+            <th>Reverb</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- Prompt Audio -->
+          <tr>
+            <td>Prompt Audio</td>
+            <td><audio controls><source src="audios/3/prompts/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/3/prompts/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/3/prompts/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/3/prompts/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Speech Enhancement -->
+          <tr>
+            <td>Speech Enhancement</td>
+            <td><audio controls><source src="audios/3/se/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/3/se/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/3/se/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/3/se/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Noise-Robust -->
+          <tr>
+            <td>Noise-Robust</td>
+            <td><audio controls><source src="audios/3/nr/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/3/nr/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/3/nr/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/3/nr/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Environment-Aware -->
+          <tr>
+            <td>Environment-Aware</td>
+            <td><audio controls><source src="audios/3/ea/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/3/ea/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/3/ea/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/3/ea/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- F5-TTS -->
+          <tr>
+            <td>F5-TTS</td>
+            <td><audio controls><source src="audios/3/f5/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/3/f5/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/3/f5/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/3/f5/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Cascaded -->
+          <tr>
+            <td>Cascaded SE+TTS</td>
+            <td><audio controls><source src="audios/3/cascade/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/3/cascade/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/3/cascade/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/3/cascade/reverb.wav"></audio></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Sample 5 -->
+    <h2 class="section-title">Sample 4</h2>
+
+    <div class="sample-block">
+
+      <!-- ================= TEXT ================= -->
+      <div class="text-block">
+
+        <div class="text-line">
+          <span class="label">Prompt Text:</span>
+          This was at the March election, eighteen fifty five.
+        </div>
+
+        <div class="text-line">
+          <span class="label">Synthesis Text:</span>
+          Their assumed character changed with their changing opportunities or necessities.
+        </div>
+
+        <div class="audio-line">
+          <span class="label">Ground Truth:</span>
+          <audio controls>
+            <source src="audios/5/gt.wav">
+          </audio>
+        </div>
+
+      </div>
+
+      <!-- ================= TABLE ================= -->
+      <table class="audio-table">
+        <thead>
+          <tr>
+            <th>Noise Conditions</th>
+            <th>Clean</th>
+            <th>Noise</th>
+            <th>Interf.</th>
+            <th>Reverb</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- Prompt Audio -->
+          <tr>
+            <td>Prompt Audio</td>
+            <td><audio controls><source src="audios/5/prompts/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/5/prompts/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/5/prompts/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/5/prompts/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Speech Enhancement -->
+          <tr>
+            <td>Speech Enhancement</td>
+            <td><audio controls><source src="audios/5/se/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/5/se/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/5/se/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/5/se/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Noise-Robust -->
+          <tr>
+            <td>Noise-Robust</td>
+            <td><audio controls><source src="audios/5/nr/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/5/nr/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/5/nr/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/5/nr/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Environment-Aware -->
+          <tr>
+            <td>Environment-Aware</td>
+            <td><audio controls><source src="audios/5/ea/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/5/ea/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/5/ea/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/5/ea/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- F5-TTS -->
+          <tr>
+            <td>F5-TTS</td>
+            <td><audio controls><source src="audios/5/f5/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/5/f5/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/5/f5/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/5/f5/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Cascaded -->
+          <tr>
+            <td>Cascaded SE+TTS</td>
+            <td><audio controls><source src="audios/5/cascade/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/5/cascade/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/5/cascade/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/5/cascade/reverb.wav"></audio></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Sample 6 -->
+    <h2 class="section-title">Sample 5</h2>
+
+    <div class="sample-block">
+
+      <!-- ================= TEXT ================= -->
+      <div class="text-block">
+
+        <div class="text-line">
+          <span class="label">Prompt Text:</span>
+          But what is the delicate mission? I asked.
+        </div>
+
+        <div class="text-line">
+          <span class="label">Synthesis Text:</span>
+          How much of evil, - of real accomplished evil, - had there not occurred to me during the last few days!
+        </div>
+
+        <div class="audio-line">
+          <span class="label">Ground Truth:</span>
+          <audio controls>
+            <source src="audios/6/gt.wav">
+          </audio>
+        </div>
+
+      </div>
+
+      <!-- ================= TABLE ================= -->
+      <table class="audio-table">
+        <thead>
+          <tr>
+            <th>Noise Conditions</th>
+            <th>Clean</th>
+            <th>Noise</th>
+            <th>Interf.</th>
+            <th>Reverb</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- Prompt Audio -->
+          <tr>
+            <td>Prompt Audio</td>
+            <td><audio controls><source src="audios/6/prompts/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/6/prompts/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/6/prompts/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/6/prompts/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Speech Enhancement -->
+          <tr>
+            <td>Speech Enhancement</td>
+            <td><audio controls><source src="audios/6/se/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/6/se/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/6/se/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/6/se/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Noise-Robust -->
+          <tr>
+            <td>Noise-Robust</td>
+            <td><audio controls><source src="audios/6/nr/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/6/nr/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/6/nr/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/6/nr/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Environment-Aware -->
+          <tr>
+            <td>Environment-Aware</td>
+            <td><audio controls><source src="audios/6/ea/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/6/ea/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/6/ea/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/6/ea/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- F5-TTS -->
+          <tr>
+            <td>F5-TTS</td>
+            <td><audio controls><source src="audios/6/f5/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/6/f5/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/6/f5/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/6/f5/reverb.wav"></audio></td>
+          </tr>
+
+          <!-- Cascaded -->
+          <tr>
+            <td>Cascaded SE+TTS</td>
+            <td><audio controls><source src="audios/6/cascade/clean.wav"></audio></td>
+            <td><audio controls><source src="audios/6/cascade/noise.wav"></audio></td>
+            <td><audio controls><source src="audios/6/cascade/interf.wav"></audio></td>
+            <td><audio controls><source src="audios/6/cascade/reverb.wav"></audio></td>
           </tr>
 
         </tbody>
